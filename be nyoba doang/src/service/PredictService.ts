@@ -8,27 +8,19 @@ import {
 import { ResponseError } from '../error/ResponseError';
 import { StatusCodes } from 'http-status-codes';
 import axios from 'axios';
-import FormData from 'form-data';
+import { KainRepository } from '../repository/KainRepository';
 
 export class PredictService {
   static async predict(req: PredictRequest): Promise<PredictResponse> {
-    const url = process.env.ML_URL as string;
     const roboflowUrl = process.env.ROBOFLOW_URL as string;
     const roboflowApiKey = process.env.ROBOFLOW_API_KEY as string;
 
-    if (!url || !roboflowUrl || !roboflowApiKey) {
-      throw new ResponseError(StatusCodes.INTERNAL_SERVER_ERROR, "Internal Server Error");
-    }
-
-    // Health check to local ML service
-    const mlHealthCheck = await axios.get(`${url}/health`);
-    if (mlHealthCheck.status !== StatusCodes.OK) {
+    if (!roboflowUrl || !roboflowApiKey) {
       throw new ResponseError(StatusCodes.INTERNAL_SERVER_ERROR, "Internal Server Error");
     }
 
     const filePath = req.filePath as string;
 
-    // ===== Roboflow Prediction =====
     const base64Image = fs.readFileSync(filePath, { encoding: 'base64' });
 
     const roboflowResponse: any = await axios.post(`${roboflowUrl}`, base64Image, {
@@ -39,6 +31,8 @@ export class PredictService {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     });
+
+    console.log("Roboflow response:", roboflowResponse.status);
 
     if (roboflowResponse.status !== StatusCodes.OK) {
       throw new ResponseError(StatusCodes.INTERNAL_SERVER_ERROR, "Internal Server Error");
@@ -51,37 +45,39 @@ export class PredictService {
       throw new ResponseError(StatusCodes.BAD_REQUEST, "This image does not contain any sambal");
     }
 
-    // Local ML Prediction
-    const formData = new FormData();
-    formData.append('file', fs.createReadStream(filePath));
-
-    const response = await axios.post(`${url}/predict`, formData, {
-      headers: {
-        ...formData.getHeaders(),
-      },
-    });
-
-    if (response.status !== StatusCodes.OK) {
-      throw new ResponseError(StatusCodes.INTERNAL_SERVER_ERROR, "Internal Server Error");
-    }
-
     fs.unlinkSync(filePath);
 
-    const data = response.data as PredictResponse;
+    const predictionRes: PredictionResult = {
+      name: '',
+      confidence: roboflowPred[0].confidence,
+      class: roboflowPred[0].class,
+      imagePath: '',
+      description: roboflowPred[0].description || ''
+    };
 
-    for (const item of data.predictions) {
-      const sambalDir = process.env.SAMBAL_PATH as string;
-      const imagePath = path.join(sambalDir, item.class).replace(/\\/g, '/');
-      const images = fs.readdirSync(imagePath);
-      const randomImage = images[Math.floor(Math.random() * images.length)];
-      item.imagePath = path.join(imagePath, randomImage).replace(/\\/g, '/');
+    const kainDir = process.env.KAIN_PATH as string;
+    const imagePath = path.join(kainDir, predictionRes.class).replace(/\\/g, '/');
+    if (!fs.existsSync(imagePath)) {
+      throw new ResponseError(StatusCodes.NOT_FOUND, "Image directory not found for this kain");
+    }
+    const images = fs.readdirSync(imagePath);
+    if (images.length === 0) {
+      throw new ResponseError(StatusCodes.NOT_FOUND, "No images found for this kain");
+    }
+    const randomImage = images[Math.floor(Math.random() * images.length)];
+    predictionRes.imagePath = path.join(imagePath, randomImage).replace(/\\/g, '/');
 
-      const sambalName = item.class.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
-      item.name = sambalName;
+    const kain = await KainRepository.getByClass(predictionRes.class);
+
+    if (!kain) {
+      throw new ResponseError(StatusCodes.NOT_FOUND, "Kain not found");
     }
 
+    predictionRes.name = kain.name;
+    predictionRes.description = kain.description || predictionRes.description;
+
     const res: PredictResponse = {
-      predictions: data.predictions,
+      prediction: predictionRes
     };
 
     return res;

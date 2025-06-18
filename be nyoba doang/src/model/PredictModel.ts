@@ -3,12 +3,13 @@ export interface PredictRequest {
 }
 
 export interface PredictResponse {
-  predictions: PredictionResult[];
+  prediction: PredictionResult
 }
 
 export interface PredictionResult {
   name: string;
-  class: string;
   confidence: number;
+  class: string;
   imagePath: string;
+  description?: string;
 }
