@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">fp-batik</string>
+    <string name="batik_image_desc">Deskripsi gambar batik</string>
 </resources>
