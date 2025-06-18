@@ -35,7 +35,7 @@ public class BatikDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_batik_detail);
+        setContentView(R.layout.activity_info);
 
         initViews();
         setupRecyclerView();

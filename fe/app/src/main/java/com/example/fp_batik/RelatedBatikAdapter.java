@@ -72,9 +72,10 @@ public class RelatedBatikAdapter extends RecyclerView.Adapter<RelatedBatikAdapte
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            batikImage = itemView.findViewById(R.id.related_batik_image);
-            batikName = itemView.findViewById(R.id.related_batik_name);
-            batikOrigin = itemView.findViewById(R.id.related_batik_origin);
+            batikImage = itemView.findViewById(R.id.relatedBatikImage);
+            batikName = itemView.findViewById(R.id.relatedBatikName); // You'll need to add this to XML
+            batikOrigin = itemView.findViewById(R.id.relatedBatikLocation);
         }
+
     }
 }
