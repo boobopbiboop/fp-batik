@@ -7,7 +7,7 @@ async function main() {
     data: [
       {
         name: "Batik Buketan Pekalongan",
-        class: "batik-buketan-pekalongan",
+        class: "batik-buketan",
         description:
           "Motif bunga khas Pekalongan dengan warna cerah dan detail halus, menggambarkan alam tropis. Kombinasi bunga, daun, dan unsur burung/kupu-kupu menciptakan harmoni visual dipengaruhi estetika Eropa dan lokal.",
         origin: "Pekalongan, Jawa Tengah",
@@ -16,7 +16,7 @@ async function main() {
         meaning: "Keindahan, kesuburan, keharmonisan, kemakmuran, kegembiraan",
         pilosophy:
           "Batik Buketan Pekalongan merupakan perpaduan sempurna antara estetika lokal dan pengaruh Eropa yang datang melalui kolonialisme. Motif ini menggambarkan filosofi hidup masyarakat pesisir yang terbuka terhadap perubahan namun tetap mempertahankan nilai-nilai tradisional. Setiap elemen bunga melambangkan siklus kehidupan, sementara warna-warna cerah mencerminkan semangat pantang menyerah. Batik ini juga menjadi simbol akulturasi budaya, di mana keindahan alam Nusantara diinterpretasikan melalui teknik dan gaya yang dipengaruhi seni Eropa, menciptakan harmoni visual yang unik.",
-        dirUrl: "batik-buketan-pekalongan",
+        dirUrl: "batik-buketan",
         history:
           "Batik Buketan mulai berkembang pesat pada abad ke-19 di Pekalongan, terutama setelah dibukanya jalur pelayaran internasional yang membawa berbagai pengaruh budaya. Awalnya motif ini hanya dibuat untuk kalangan bangsawan dan saudagar kaya, kemudian menyebar ke masyarakat umum. Pada masa Hindia Belanda, batik buketan menjadi komoditas ekspor yang diminati di Eropa. Perkembangannya tidak lepas dari peran para perempuan Pekalongan yang dengan sabar mengembangkan teknik dan variasi motif. Hingga kini, batik buketan tetap menjadi ikon Pekalongan dengan sentuhan kontemporer namun tidak meninggalkan pakem tradisionalnya.",
       },
@@ -93,7 +93,7 @@ async function main() {
         meaning: "Kebebasan, ketenangan, kesuburan, keluasan, kedamaian",
         pilosophy:
           "Megamendung melambangkan konsep kosmologi dalam budaya Cirebon yang memandang langit sebagai simbol kebesaran Tuhan. Bentuk awan yang bergelombang menggambarkan dinamika kehidupan manusia yang tidak statis. Filosofi motif ini juga terkait erat dengan konsep 'kepapan' atau keseimbangan dalam tradisi Jawa-Sunda. Warna biru melambangkan kedalaman ilmu dan ketenangan jiwa, sementara merah menyimbolkan keberanian dan semangat hidup. Megamendung juga merefleksikan ajaran tasawuf tentang perjalanan manusia mendekatkan diri kepada Sang Pencipta. Setiap lengkungan pada motif ini mengandung makna tentang fleksibilitas dalam menghadapi tantangan hidup.",
-        dirUrl: "batik-megamendung",
+        dirUrl: "batik-megamendung-cirebon",
         history:
           "Batik Megamendung mulai dikenal pada abad ke-16 di Kesultanan Cirebon, dipengaruhi oleh seni awan dalam budaya Tionghoa yang dibawa oleh para pedagang. Awalnya motif ini hanya digunakan untuk kain panjang para sultan dan bangsawan keraton. Pada abad ke-17, Sunan Gunung Jati mengembangkan motif ini sebagai media dakwah, dengan bentuk awan yang melambangkan kebesaran Ilahi. Masa kejayaan motif Megamendung terjadi pada abad ke-18 ketika Cirebon menjadi pusat perdagangan penting. Setiap periode memberikan perkembangan pada motif ini, mulai dari yang sangat sederhana hingga sangat detail. Pada abad ke-20, Megamendung mulai dikenal luas sebagai ikon batik Cirebon dan terus berkembang dengan berbagai inovasi warna dan teknik.",
       },

@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
     public void onScanClicked(View view) {
         Toast.makeText(this, "Scan button clicked!", Toast.LENGTH_SHORT).show();
         // Example: Start a new activity for scanning
-        // Intent scanIntent = new Intent(MainActivity.this, ScanActivity.class);
-        // startActivity(scanIntent);
+         Intent scanIntent = new Intent(MainActivity.this, ScanActivity.class);
+         startActivity(scanIntent);
     }
 
     /**

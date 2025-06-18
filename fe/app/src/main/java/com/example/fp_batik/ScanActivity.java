@@ -5,25 +5,31 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.NetworkRequest;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.example.fp_batik.api.ApiEndpoints;
 import com.example.fp_batik.api.VolleySingleton;
 import com.example.fp_batik.api.VolleyMultipartRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Objects;
@@ -45,6 +51,12 @@ public class ScanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                finish();
+            }
+        });
         // Langsung buka kamera tanpa layout
         openCamera();
     }
@@ -85,8 +97,6 @@ public class ScanActivity extends AppCompatActivity {
         if (bitmap != null) {
             Toast.makeText(this, "Mengidentifikasi motif batik...", Toast.LENGTH_SHORT).show();
 
-            String url = "http://192.168.54.169:3002/api/predict"; // ganti ke URL backend kamu
-
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
             byte[] imageData = stream.toByteArray();
@@ -94,15 +104,59 @@ public class ScanActivity extends AppCompatActivity {
 
             VolleyMultipartRequest volleyRequest = new VolleyMultipartRequest(
                     Request.Method.POST,
-                    url,
+                    ApiEndpoints.PREDICT,
                     response -> {
-                        String resultResponse = new String(response.data);
-                        Log.e("response", resultResponse);
-                        Toast.makeText(this, "Berhasil: " + resultResponse, Toast.LENGTH_LONG).show();
+                        try {
+                            String batikClass = new JSONObject(new String(response.data))
+                                    .getJSONObject("data")
+                                    .getJSONObject("prediction")
+                                    .getString("class");
+
+                            Log.e("BATIK KELAS", batikClass);
+
+
+                            JsonObjectRequest getBatikRequest = new JsonObjectRequest(
+                                    String.format(ApiEndpoints.GET_BATIK, batikClass),
+                                    response1 -> {
+                                        try {
+                                            JSONObject kainData = response1.getJSONObject("data").getJSONObject("kainData");
+                                            JSONArray pictures = response1.getJSONObject("data").getJSONArray("pictures");
+
+                                            Intent resultIntent = new Intent(ScanActivity.this, BatikDetailActivity.class);
+
+                                            resultIntent.putExtra("batik_name", kainData.getString("name"));
+                                            resultIntent.putExtra("batik_origin", kainData.getString("origin"));
+                                            resultIntent.putExtra("batik_era", kainData.getInt("century"));
+                                            resultIntent.putExtra("batik_type", kainData.getString("type"));
+                                            resultIntent.putExtra("batik_meaning", kainData.getString("meaning"));
+                                            resultIntent.putExtra("batik_image_url", String.format(ApiEndpoints.IMAGE, pictures.getString(0)));
+                                            resultIntent.putExtra("from_scan", true);
+
+                                            Toast.makeText(this, "Berhasil Deteksi", Toast.LENGTH_LONG).show();
+
+                                            startActivity(resultIntent);
+                                            finish();
+                                        } catch (Exception error) {
+                                            Log.e("GET KAIN DATA", error.toString());
+                                            Toast.makeText(this, "Terjadi Kesalahan dalam Mengambil Data Batik", Toast.LENGTH_LONG).show();
+                                        }
+                                    },
+                                    error -> {
+                                        Log.e("GET KAIN", error.toString());
+                                        Toast.makeText(this, "Gagal: " + error.toString(), Toast.LENGTH_LONG).show();
+                                    }
+                            );
+
+                            VolleySingleton.getInstance(this).addToRequestQueue(getBatikRequest);
+
+                        } catch (Exception error) {
+                            Log.e("DETECTION DATA", error.toString());
+                            Toast.makeText(this, "Terjadi Kesalahan dalam Deteksi", Toast.LENGTH_LONG).show();
+                        }
                     },
                     error -> {
+                        Log.e("DETECTION", error.toString());
                         Toast.makeText(this, "Gagal: " + error.toString(), Toast.LENGTH_LONG).show();
-
                     });
 
             volleyRequest.addFile("image", new VolleyMultipartRequest.DataPart(
@@ -113,37 +167,6 @@ public class ScanActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Gagal memuat gambar", Toast.LENGTH_SHORT).show();
         }
-        // Simulate AI processing time (replace with your actual ML/API logic)
-//        new android.os.Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                // Simulate different batik results
-//                String[] batikNames = {"Batik Parang", "Batik Kawung", "Batik Mega Mendung", "Batik Truntum"};
-//                String[] origins = {"Yogyakarta", "Solo", "Cirebon", "Yogyakarta"};
-//                String[] meanings = {
-//                        "Melambangkan kekuatan dan keteguhan hati",
-//                        "Melambangkan kesucian dan keadilan",
-//                        "Melambangkan kesabaran dan ketenangan",
-//                        "Melambangkan cinta kasih yang tumbuh"
-//                };
-//
-//                // Random selection for demo (replace with actual AI result)
-//                int randomIndex = (int) (Math.random() * batikNames.length);
-//
-//                // Redirect to BatikDetailActivity
-//                Intent resultIntent = new Intent(ScanActivity.this, BatikDetailActivity.class);
-//                resultIntent.putExtra("batik_name", batikNames[randomIndex]);
-//                resultIntent.putExtra("batik_origin", origins[randomIndex]);
-//                resultIntent.putExtra("batik_era", "Klasik");
-//                resultIntent.putExtra("batik_type", "Tradisional");
-//                resultIntent.putExtra("batik_meaning", meanings[randomIndex]);
-//                resultIntent.putExtra("batik_image_url", "https://example.com/batik.jpg");
-//                resultIntent.putExtra("from_scan", true);
-//
-//                startActivity(resultIntent);
-//                finish(); // Close scan activity
-//            }
-//        }, 1500); // 1.5 second processing
     }
 
     @Override
@@ -161,11 +184,5 @@ public class ScanActivity extends AppCompatActivity {
                 finish(); // Kembali ke activity sebelumnya
             }
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
     }
 }

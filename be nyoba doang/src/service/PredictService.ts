@@ -1,13 +1,13 @@
+import axios from "axios";
 import fs from "fs";
+import { StatusCodes } from "http-status-codes";
 import path from "path";
+import { ResponseError } from "../error/ResponseError";
 import {
   PredictionResult,
   PredictRequest,
   PredictResponse,
 } from "../model/PredictModel";
-import { ResponseError } from "../error/ResponseError";
-import { StatusCodes } from "http-status-codes";
-import axios from "axios";
 import { KainRepository } from "../repository/KainRepository";
 
 export class PredictService {
@@ -50,15 +50,15 @@ export class PredictService {
 
     const roboflowPred: any = roboflowResponse.data.predictions;
 
-    if (roboflowPred.length === 0 || roboflowPred.confidence < 0.5) {
+    if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);
+    }
+    if (roboflowPred.length === 0 || roboflowPred.confidence < 0.5) {
       throw new ResponseError(
         StatusCodes.BAD_REQUEST,
-        "This image does not contain any sambal"
+        "This image does not contain any kain"
       );
     }
-
-    fs.unlinkSync(filePath);
 
     const predictionRes: PredictionResult = {
       name: "",
@@ -98,11 +98,11 @@ export class PredictService {
 
     predictionRes.name = kain.name;
     predictionRes.description = kain.description || predictionRes.description;
-
     const res: PredictResponse = {
       prediction: predictionRes,
     };
 
+    console.log("Prediction result:", res);
     return res;
   }
 }
