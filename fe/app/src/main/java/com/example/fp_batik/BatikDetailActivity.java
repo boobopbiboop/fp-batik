@@ -2,6 +2,7 @@ package com.example.fp_batik;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -97,6 +98,8 @@ public class BatikDetailActivity extends AppCompatActivity {
 
             // Get variation images dari Roboflow
             String[] variationImages = intent.getStringArrayExtra("batik_variations");
+
+            Log.e("BATIK", batikImageUrl);
 
             // Set data to views
             if (batikName != null) {
