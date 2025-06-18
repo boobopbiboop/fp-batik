@@ -8,4 +8,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="primary_color">#6200EE</color>
+    <color name="gray">#808080</color>
+    <color name="light_gray">#F5F5F5</color>
+
+
 </resources>
