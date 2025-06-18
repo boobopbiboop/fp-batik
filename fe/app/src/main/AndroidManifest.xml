@@ -17,33 +17,29 @@
         android:theme="@style/Theme.Fpbatik"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".GalleryActivity"
+            android:exported="false" />
         <!-- Splash Activity sebagai launcher -->
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/Theme.SplashTheme"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- 2. Main Activity - Gallery -->
+        </activity> <!-- 2. Main Activity - Gallery -->
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
-
-        <!-- 3. Batik Detail Activity - Info Batik -->
+            android:exported="false" /> <!-- 3. Batik Detail Activity - Info Batik -->
         <activity
             android:name=".BatikDetailActivity"
-            android:exported="false" />
-
-        <!-- 4. Scan Activity - Camera -->
+            android:exported="false" /> <!-- 4. Scan Activity - Camera -->
         <activity
             android:name=".ScanActivity"
             android:exported="false" />
-
     </application>
 
 </manifest>
