@@ -21,6 +21,7 @@ import com.example.fp_batik.api.ApiEndpoints;
 import com.example.fp_batik.api.VolleySingleton;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,9 +53,18 @@ public class MainActivity extends AppCompatActivity {
                         JSONArray batikArray = response.getJSONArray("data");
                         // Assuming the response is an array of batik objects
                         for (int i = 0; i < batikArray.length(); i++) {
-                            String batikName = batikArray.getJSONObject(i).getString("name");
-                            String imageUrl = batikArray.getJSONObject(i).getString("dirUrl");
-                            addGridItem(batikName, String.format(ApiEndpoints.IMAGE, imageUrl));
+                            JSONObject batikData = batikArray.getJSONObject(i);
+
+                            BatikItem batikItem = new BatikItem(
+                                batikData.getString("id"),
+                                batikData.getString("name"),
+                                batikData.getString("origin"),
+                                String.format(ApiEndpoints.IMAGE, batikData.getString("dirUrl")),
+                                batikData.getString("type"),
+                                batikData.getInt("century"),
+                                batikData.getString("meaning")
+                            );
+                            addGridItem(batikItem);
                         }
                     } catch (Exception error) {
                         Log.e("GET ALL BATIK", error.toString());
@@ -84,10 +94,9 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Adds an item to the GridLayout.
      * Each item consists of an ImageView and a TextView.
-     * @param name The name of the batik.
-     * @param batikImageUrl The url for the batik image.
+     * @param batik The instance of BatikItem.
      */
-    private void addGridItem(String name, String batikImageUrl) {
+    private void addGridItem(BatikItem batik) {
         // Inflate a new item layout
         // You might want to create a separate XML layout for your grid items (e.g., grid_item.xml)
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -96,24 +105,31 @@ public class MainActivity extends AppCompatActivity {
         ImageView itemImage = gridItemView.findViewById(R.id.item_image);
         TextView itemName = gridItemView.findViewById(R.id.item_name);
 
-        if (!batikImageUrl.isEmpty()) {
+        if (!batik.getImageUrl().isEmpty()) {
             Glide.with(this)
-                    .load(batikImageUrl)
+                    .load(batik.getImageUrl())
                     .placeholder(R.drawable.placeholder_image)
                     .error(R.drawable.error_image)
                     .into(itemImage);
         }
 
-        itemName.setText(name);
+        itemName.setText(batik.getName());
 
         // Optional: Set a click listener for each grid item
         gridItemView.setOnClickListener(v -> {
-            Toast.makeText(MainActivity.this, "Clicked: " + name, Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Clicked: " + batik.getName(), Toast.LENGTH_SHORT).show();
             // Example: Start a detail activity for the clicked item
-            // Intent detailIntent = new Intent(MainActivity.this, DetailActivity.class);
-            // detailIntent.putExtra("batik_name", name);
-            // detailIntent.putExtra("batik_image", imageResId);
-            // startActivity(detailIntent);
+            Intent resultIntent = new Intent(MainActivity.this, BatikDetailActivity.class);
+
+            resultIntent.putExtra("batik_name", batik.getName());
+            resultIntent.putExtra("batik_origin", batik.getOrigin());
+            resultIntent.putExtra("batik_era", batik.getEra());
+            resultIntent.putExtra("batik_type", batik.getType());
+            resultIntent.putExtra("batik_meaning", batik.getMeaning());
+            resultIntent.putExtra("batik_image_url", batik.getImageUrl());
+            resultIntent.putExtra("from_scan", false);
+
+            startActivity(resultIntent);
         });
 
         gridLayout.addView(gridItemView);

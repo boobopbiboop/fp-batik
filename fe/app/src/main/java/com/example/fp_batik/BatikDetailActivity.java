@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class BatikDetailActivity extends AppCompatActivity {
 
@@ -89,7 +90,7 @@ public class BatikDetailActivity extends AppCompatActivity {
         if (intent != null) {
             String batikName = intent.getStringExtra("batik_name");
             String batikOrigin = intent.getStringExtra("batik_origin");
-            String batikEra = intent.getStringExtra("batik_era");
+            int batikEra = intent.getIntExtra("batik_era", -1);
             String batikType = intent.getStringExtra("batik_type");
             String batikMeaning = intent.getStringExtra("batik_meaning");
             String batikImageUrl = intent.getStringExtra("batik_image_url");
@@ -112,8 +113,8 @@ public class BatikDetailActivity extends AppCompatActivity {
                 originValue.setText(batikOrigin);
             }
 
-            if (batikEra != null) {
-                eraValue.setText(batikEra);
+            if (batikEra != -1) {
+                eraValue.setText(String.format(Locale.ENGLISH, "Abad ke-%d", batikEra));
             }
 
             if (batikType != null) {
@@ -231,32 +232,15 @@ private void loadRelatedBatikData() {
 
     relatedBatikList.clear();
 
-    // Load batik terkait (SELAIN yang sedang dilihat)
-    // Semua gambar dari Roboflow dataset
-//    if (!"Batik Parang".equals(currentBatikName)) {
-//        relatedBatikList.add(new BatikItem("1", "Batik Parang", "Yogyakarta",
-//                "https://your-roboflow-dataset.com/parang-main.jpg", "Klasik", "Kekuatan"));
-//    }
-//
-//    if (!"Batik Kawung".equals(currentBatikName)) {
-//        relatedBatikList.add(new BatikItem("2", "Batik Kawung", "Solo",
-//                "https://your-roboflow-dataset.com/kawung-main.jpg", "Tradisional", "Kesucian"));
-//    }
-//
-//    if (!"Batik Mega Mendung".equals(currentBatikName)) {
-//        relatedBatikList.add(new BatikItem("3", "Batik Mega Mendung", "Cirebon",
-//                "https://your-roboflow-dataset.com/mega-mendung-main.jpg", "Pesisir", "Kesabaran"));
-//    }
-//
-//    if (!"Batik Truntum".equals(currentBatikName)) {
-//        relatedBatikList.add(new BatikItem("4", "Batik Truntum", "Yogyakarta",
-//                "https://your-roboflow-dataset.com/truntum-main.jpg", "Klasik", "Cinta Kasih"));
-//    }
-//
-//    if (!"Batik Sido Mukti".equals(currentBatikName)) {
-//        relatedBatikList.add(new BatikItem("5", "Batik Sido Mukti", "Solo",
-//                "https://your-roboflow-dataset.com/sido-mukti-main.jpg", "Tradisional", "Kebahagiaan"));
-//    }
+        // Add sample related batik items
+        relatedBatikList.add(new BatikItem("1", "Batik Parang", "Yogyakarta",
+                "https://example.com/batik1.jpg", 19, "Kekuatan"));
+        relatedBatikList.add(new BatikItem("2", "Batik Kawung", "Solo",
+                "https://example.com/batik2.jpg", 19, "Kesucian"));
+        relatedBatikList.add(new BatikItem("3", "Batik Mega Mendung", "Cirebon",
+                "https://example.com/batik3.jpg", 19, "Kesabaran"));
+        relatedBatikList.add(new BatikItem("4", "Batik Truntum", "Yogyakarta",
+                "https://example.com/batik4.jpg", 19, "Cinta Kasih"));
 
     relatedBatikAdapter.notifyDataSetChanged();
 }
