@@ -121,6 +121,9 @@ public class ScanActivity extends AppCompatActivity {
                                         try {
                                             JSONObject kainData = response1.getJSONObject("data").getJSONObject("kainData");
                                             JSONArray pictures = response1.getJSONObject("data").getJSONArray("pictures");
+                                            String[] variationImages = new String[pictures.length()];
+                                            for(int i = 0; i < pictures.length(); i++)
+                                                variationImages[i] = String.format(ApiEndpoints.IMAGE, pictures.getString(i));
 
                                             Intent resultIntent = new Intent(ScanActivity.this, BatikDetailActivity.class);
 
@@ -130,6 +133,9 @@ public class ScanActivity extends AppCompatActivity {
                                             resultIntent.putExtra("batik_type", kainData.getString("type"));
                                             resultIntent.putExtra("batik_meaning", kainData.getString("meaning"));
                                             resultIntent.putExtra("batik_image_url", String.format(ApiEndpoints.IMAGE, pictures.getString(0)));
+                                            resultIntent.putExtra("batik_philosophy", kainData.getString("pilosophy"));
+                                            resultIntent.putExtra("batik_history", kainData.getString("history"));
+                                            resultIntent.putExtra("batik_variations", variationImages);
                                             resultIntent.putExtra("from_scan", true);
 
                                             Toast.makeText(this, "Berhasil Deteksi", Toast.LENGTH_LONG).show();

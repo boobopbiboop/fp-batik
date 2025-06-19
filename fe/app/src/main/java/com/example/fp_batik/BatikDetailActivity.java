@@ -230,19 +230,19 @@ private void loadRelatedBatikData() {
     // Get current batik name untuk filter
     String currentBatikName = getIntent().getStringExtra("batik_name");
 
-    relatedBatikList.clear();
+//    relatedBatikList.clear();
+//
+//        // Add sample related batik items
+//        relatedBatikList.add(new BatikItem("1", "Batik Parang", "Yogyakarta",
+//                "https://example.com/batik1.jpg", 19, "Kekuatan"));
+//        relatedBatikList.add(new BatikItem("2", "Batik Kawung", "Solo",
+//                "https://example.com/batik2.jpg", 19, "Kesucian"));
+//        relatedBatikList.add(new BatikItem("3", "Batik Mega Mendung", "Cirebon",
+//                "https://example.com/batik3.jpg", 19, "Kesabaran"));
+//        relatedBatikList.add(new BatikItem("4", "Batik Truntum", "Yogyakarta",
+//                "https://example.com/batik4.jpg", 19, "Cinta Kasih"));
 
-        // Add sample related batik items
-        relatedBatikList.add(new BatikItem("1", "Batik Parang", "Yogyakarta",
-                "https://example.com/batik1.jpg", 19, "Kekuatan"));
-        relatedBatikList.add(new BatikItem("2", "Batik Kawung", "Solo",
-                "https://example.com/batik2.jpg", 19, "Kesucian"));
-        relatedBatikList.add(new BatikItem("3", "Batik Mega Mendung", "Cirebon",
-                "https://example.com/batik3.jpg", 19, "Kesabaran"));
-        relatedBatikList.add(new BatikItem("4", "Batik Truntum", "Yogyakarta",
-                "https://example.com/batik4.jpg", 19, "Cinta Kasih"));
-
-    relatedBatikAdapter.notifyDataSetChanged();
+//    relatedBatikAdapter.notifyDataSetChanged();
 }
 
 

@@ -25,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // Intent ke MainActivity setelah delay
-                Intent intent = new Intent(SplashActivity.this, BatikDetailActivity.class);
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish(); // Tutup SplashActivity
             }
