@@ -46,4 +46,5 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.15.1")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
     implementation ("androidx.gridlayout:gridlayout:1.0.0")
+    implementation ("com.google.android.flexbox:flexbox:3.0.0")
 }

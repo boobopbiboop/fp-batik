@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(this, "Berhasil Deteksi", Toast.LENGTH_LONG).show();
 
                             startActivity(resultIntent);
-                            finish();
+//                            finish();
                         } catch (Exception error) {
                             Log.e("GET KAIN DATA", error.toString());
                             Toast.makeText(this, "Terjadi Kesalahan dalam Mengambil Data Batik", Toast.LENGTH_LONG).show();
