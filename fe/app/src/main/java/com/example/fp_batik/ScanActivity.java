@@ -34,7 +34,7 @@ import java.util.Objects;
 public class ScanActivity extends AppCompatActivity {
 
     private static final int CAMERA_PERMISSION_CODE = 102;
-    private static final double CONFIDENCE_THRESHOLD = 0.8;
+    private static final double CONFIDENCE_THRESHOLD = 0.5;
 
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
