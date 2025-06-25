@@ -564,52 +564,51 @@
                 </LinearLayout>
 
                 <!-- Related Batik Section -->
-                <LinearLayout
-                    android:id="@+id/relatedBatikContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/relatedBatikContainer"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical">-->
 
-                    <LinearLayout
-                        android:id="@+id/relatedBatikHeader"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="horizontal">
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/relatedBatikHeader"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center_vertical"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:orientation="horizontal">-->
 
-                        <LinearLayout
-                            android:id="@+id/relatedBatikSpacer"
-                            android:layout_width="23dp"
-                            android:layout_height="13dp"
-                            android:layout_marginEnd="3dp"
-                            android:orientation="vertical">
-                        </LinearLayout>
+<!--                        <LinearLayout-->
+<!--                            android:id="@+id/relatedBatikSpacer"-->
+<!--                            android:layout_width="23dp"-->
+<!--                            android:layout_height="13dp"-->
+<!--                            android:layout_marginEnd="3dp"-->
+<!--                            android:orientation="vertical">-->
+<!--                        </LinearLayout>-->
 
-                        <ImageView
-                            android:id="@+id/relatedBatikIcon"
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:layout_marginEnd="4dp"
-                            android:src="@drawable/hash"
-                            android:scaleType="fitXY"/>
+<!--                        <ImageView-->
+<!--                            android:id="@+id/relatedBatikIcon"-->
+<!--                            android:layout_width="18dp"-->
+<!--                            android:layout_height="18dp"-->
+<!--                            android:layout_marginEnd="4dp"-->
+<!--                            android:src="@drawable/hash"-->
+<!--                            android:scaleType="fitXY"/>-->
 
-                        <TextView
-                            android:id="@+id/relatedBatikTitle"
-                            android:textColor="#000000"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:text="Batik Terkait"/>
-                    </LinearLayout>
-'
-                    <!-- RecyclerView -->
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/relatedBatikRecyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
+<!--                        <TextView-->
+<!--                            android:id="@+id/relatedBatikTitle"-->
+<!--                            android:textColor="#000000"-->
+<!--                            android:textSize="9sp"-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:text="Batik Terkait"/>-->
+<!--                    </LinearLayout>-->
+<!--'-->
+<!--                    &lt;!&ndash; RecyclerView &ndash;&gt;-->
+<!--                    <androidx.recyclerview.widget.RecyclerView-->
+<!--                        android:id="@+id/relatedBatikRecyclerView"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"/>-->
 <!--                    &lt;!&ndash; Related Batik Grid &ndash;&gt;-->
 <!--                    <LinearLayout-->
 <!--                        android:id="@+id/relatedBatikGrid"-->
@@ -865,7 +864,7 @@
 
 <!--                        </LinearLayout>-->
 <!--                    </LinearLayout>-->
-                </LinearLayout>
+<!--                </LinearLayout>-->
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
