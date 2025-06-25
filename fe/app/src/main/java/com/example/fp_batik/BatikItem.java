@@ -4,7 +4,7 @@ public class BatikItem {
     private String id;
     private String name;
     private String origin;
-    private String era;
+    private Integer era;
     private String type;
     private String meaning;
     private String philosophy;
@@ -14,7 +14,7 @@ public class BatikItem {
 
     // Fixed constructor with proper braces and parameter assignment
     public BatikItem(String id, String name, String origin, String imageUrl, String type, String meaning,
-                     String era, String philosophy, String history, String[] variationImages) {
+                     Integer era, String philosophy, String history, String[] variationImages) {
         this.id = id;
         this.name = name;
         this.origin = origin;
@@ -52,7 +52,7 @@ public class BatikItem {
         return meaning;
     }
 
-    public String getEra() {
+    public Integer getEra() {
         return era;
     }
 
@@ -93,7 +93,7 @@ public class BatikItem {
         this.meaning = meaning;
     }
 
-    public void setEra(String era) {
+    public void setEra(Integer era) {
         this.era = era;
     }
 

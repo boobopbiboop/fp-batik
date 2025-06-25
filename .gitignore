@@ -1,0 +1,13 @@
+/be\ nyoba\ doang/node_modules/
+/be\ nyoba\ doang/dist/               
+/be\ nyoba\ doang/build/
+/be\ nyoba\ doang/.npm/
+/be\ nyoba\ doang/.eslintcache
+/be\ nyoba\ doang/logs/
+/be\ nyoba\ doang/*.log*             
+
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

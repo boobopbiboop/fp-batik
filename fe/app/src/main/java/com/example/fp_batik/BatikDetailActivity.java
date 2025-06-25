@@ -2,6 +2,7 @@ package com.example.fp_batik;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class BatikDetailActivity extends AppCompatActivity {
 
@@ -88,7 +90,7 @@ public class BatikDetailActivity extends AppCompatActivity {
         if (intent != null) {
             String batikName = intent.getStringExtra("batik_name");
             String batikOrigin = intent.getStringExtra("batik_origin");
-            String batikEra = intent.getStringExtra("batik_era");
+            int batikEra = intent.getIntExtra("batik_era", -1);
             String batikType = intent.getStringExtra("batik_type");
             String batikMeaning = intent.getStringExtra("batik_meaning");
             String batikImageUrl = intent.getStringExtra("batik_image_url");
@@ -97,6 +99,8 @@ public class BatikDetailActivity extends AppCompatActivity {
 
             // Get variation images dari Roboflow
             String[] variationImages = intent.getStringArrayExtra("batik_variations");
+
+            Log.e("BATIK", batikImageUrl);
 
             // Set data to views
             if (batikName != null) {
@@ -109,8 +113,8 @@ public class BatikDetailActivity extends AppCompatActivity {
                 originValue.setText(batikOrigin);
             }
 
-            if (batikEra != null) {
-                eraValue.setText(batikEra);
+            if (batikEra != -1) {
+                eraValue.setText(String.format(Locale.ENGLISH, "Abad ke-%d", batikEra));
             }
 
             if (batikType != null) {
@@ -257,8 +261,6 @@ private String[] getDefaultVariationUrls(String batikName) {
 //
 //    relatedBatikAdapter.notifyDataSetChanged();
 //}
-
-
 
 private void setupClickListeners() {
         backButton.setOnClickListener(new View.OnClickListener() {
