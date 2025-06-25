@@ -44,7 +44,7 @@ public class BatikDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info);
 
         initViews();
-        setupRecyclerView();
+//        setupRecyclerView();
         loadBatikData();
         setupClickListeners();
     }
@@ -66,21 +66,21 @@ public class BatikDetailActivity extends AppCompatActivity {
         variationImage2 = findViewById(R.id.variationImage2);
         variationImage3 = findViewById(R.id.variationImage3);
         historyText = findViewById(R.id.historyText);
-        relatedBatikRecyclerView = findViewById(R.id.relatedBatikRecyclerView);
+//        relatedBatikRecyclerView = findViewById(R.id.relatedBatikRecyclerView);
     }
 
-    private void setupRecyclerView() {
-        relatedBatikList = new ArrayList<>();
-        relatedBatikAdapter = new RelatedBatikAdapter(relatedBatikList, this);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        relatedBatikRecyclerView.setLayoutManager(layoutManager);
-        relatedBatikRecyclerView.setAdapter(relatedBatikAdapter);
-
-        // Add some spacing between items
-        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.recycler_item_spacing);
-        relatedBatikRecyclerView.addItemDecoration(new SpacingItemDecoration(spacingInPixels));
-    }
+//    private void setupRecyclerView() {
+//        relatedBatikList = new ArrayList<>();
+//        relatedBatikAdapter = new RelatedBatikAdapter(relatedBatikList, this);
+//
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+//        relatedBatikRecyclerView.setLayoutManager(layoutManager);
+//        relatedBatikRecyclerView.setAdapter(relatedBatikAdapter);
+//
+//        // Add some spacing between items
+//        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.recycler_item_spacing);
+//        relatedBatikRecyclerView.addItemDecoration(new SpacingItemDecoration(spacingInPixels));
+//    }
 
     private void loadBatikData() {
         // Get data from Intent
@@ -152,7 +152,7 @@ public class BatikDetailActivity extends AppCompatActivity {
         }
 
         // Load related batik data
-        loadRelatedBatikData();
+//        loadRelatedBatikData();
     }
 
     private void loadVariationImages(String[] variationImages) {
@@ -222,41 +222,41 @@ private String[] getDefaultVariationUrls(String batikName) {
     return new String[]{"", "", ""};
 }
 
-private void loadRelatedBatikData() {
-    // Get current batik name untuk filter
-    String currentBatikName = getIntent().getStringExtra("batik_name");
-
-    relatedBatikList.clear();
-
-    // Load batik terkait (SELAIN yang sedang dilihat)
-    // Semua gambar dari Roboflow dataset
-//    if (!"Batik Parang".equals(currentBatikName)) {
-//        relatedBatikList.add(new BatikItem("1", "Batik Parang", "Yogyakarta",
-//                "https://your-roboflow-dataset.com/parang-main.jpg", "Klasik", "Kekuatan"));
-//    }
+//private void loadRelatedBatikData() {
+//    // Get current batik name untuk filter
+//    String currentBatikName = getIntent().getStringExtra("batik_name");
 //
-//    if (!"Batik Kawung".equals(currentBatikName)) {
-//        relatedBatikList.add(new BatikItem("2", "Batik Kawung", "Solo",
-//                "https://your-roboflow-dataset.com/kawung-main.jpg", "Tradisional", "Kesucian"));
-//    }
+//    relatedBatikList.clear();
 //
-//    if (!"Batik Mega Mendung".equals(currentBatikName)) {
-//        relatedBatikList.add(new BatikItem("3", "Batik Mega Mendung", "Cirebon",
-//                "https://your-roboflow-dataset.com/mega-mendung-main.jpg", "Pesisir", "Kesabaran"));
-//    }
+//    // Load batik terkait (SELAIN yang sedang dilihat)
+//    // Semua gambar dari Roboflow dataset
+////    if (!"Batik Parang".equals(currentBatikName)) {
+////        relatedBatikList.add(new BatikItem("1", "Batik Parang", "Yogyakarta",
+////                "https://your-roboflow-dataset.com/parang-main.jpg", "Klasik", "Kekuatan"));
+////    }
+////
+////    if (!"Batik Kawung".equals(currentBatikName)) {
+////        relatedBatikList.add(new BatikItem("2", "Batik Kawung", "Solo",
+////                "https://your-roboflow-dataset.com/kawung-main.jpg", "Tradisional", "Kesucian"));
+////    }
+////
+////    if (!"Batik Mega Mendung".equals(currentBatikName)) {
+////        relatedBatikList.add(new BatikItem("3", "Batik Mega Mendung", "Cirebon",
+////                "https://your-roboflow-dataset.com/mega-mendung-main.jpg", "Pesisir", "Kesabaran"));
+////    }
+////
+////    if (!"Batik Truntum".equals(currentBatikName)) {
+////        relatedBatikList.add(new BatikItem("4", "Batik Truntum", "Yogyakarta",
+////                "https://your-roboflow-dataset.com/truntum-main.jpg", "Klasik", "Cinta Kasih"));
+////    }
+////
+////    if (!"Batik Sido Mukti".equals(currentBatikName)) {
+////        relatedBatikList.add(new BatikItem("5", "Batik Sido Mukti", "Solo",
+////                "https://your-roboflow-dataset.com/sido-mukti-main.jpg", "Tradisional", "Kebahagiaan"));
+////    }
 //
-//    if (!"Batik Truntum".equals(currentBatikName)) {
-//        relatedBatikList.add(new BatikItem("4", "Batik Truntum", "Yogyakarta",
-//                "https://your-roboflow-dataset.com/truntum-main.jpg", "Klasik", "Cinta Kasih"));
-//    }
-//
-//    if (!"Batik Sido Mukti".equals(currentBatikName)) {
-//        relatedBatikList.add(new BatikItem("5", "Batik Sido Mukti", "Solo",
-//                "https://your-roboflow-dataset.com/sido-mukti-main.jpg", "Tradisional", "Kebahagiaan"));
-//    }
-
-    relatedBatikAdapter.notifyDataSetChanged();
-}
+//    relatedBatikAdapter.notifyDataSetChanged();
+//}
 
 
 
