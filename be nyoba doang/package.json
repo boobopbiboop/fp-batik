@@ -31,7 +31,7 @@
     "@types/express": "^5.0.0",
     "@types/multer": "^1.4.12",
     "@types/nodemon": "^1.19.6",
-    "nodemon": "^3.1.7",
+    "nodemon": "^3.1.10",
     "prisma": "^6.10.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"

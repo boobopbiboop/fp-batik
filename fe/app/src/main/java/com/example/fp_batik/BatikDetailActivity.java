@@ -68,7 +68,7 @@ public class BatikDetailActivity extends AppCompatActivity {
         variationImage2 = findViewById(R.id.variationImage2);
         variationImage3 = findViewById(R.id.variationImage3);
         historyText = findViewById(R.id.historyText);
-        relatedBatikRecyclerView = findViewById(R.id.relatedBatikRecyclerView);
+//        relatedBatikRecyclerView = findViewById(R.id.relatedBatikRecyclerView);
     }
 
     private void setupRecyclerView() {
