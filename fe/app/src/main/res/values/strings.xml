@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">fp-batik</string>
-    <string name="batik_image_desc">Deskripsi gambar batik</string>
-    <string name="back">Back</string>
-    <string name="scan_batik">Scan Batik</string>
-    <string name="scan_now">Scan Now</string>
-    <string name="scan_guide">Point your camera at batik fabric</string>
-</resources>
